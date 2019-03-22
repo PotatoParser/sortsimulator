@@ -158,3 +158,11 @@ td {
 	display: flex;
 	flex-direction: row;
 }
+
+a {
+	font-size: 2vmin;
+	color: black;
+	margin: auto 0;
+	display: block;
+	text-align: center;
+}

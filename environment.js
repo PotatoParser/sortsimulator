@@ -1,3 +1,5 @@
+// Github Repo: https://github.com/PotatoParser/sortsimulator
+
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let STOP, PAUSE;	
@@ -129,23 +131,27 @@ function changeTime(newTime){
 	document.querySelector("#time").value = _offline.SLEEP;
 	document.querySelector("#timeAdjuster").value = _offline.SLEEP;
 }
+
 function changeSize(newSize){
 	_offline.SIZE = Math.min(Math.max(Math.floor(newSize),1), 2000);
 	document.querySelector("#sizeAdjuster").value = _offline.SIZE;			
 	document.querySelector("input").value = _offline.SIZE;
 }
+
 function lockAll(){
 	let temp = document.querySelectorAll(".disableable");
 	for (let i = 0; i < temp.length; i++) temp[i].setAttribute("disabled", '');		
 	document.querySelector("#play").removeAttribute("disabled");
 	STOP = false;
 }
+
 function openAll(){
 	let temp = document.querySelectorAll(".disableable");
 	for (let i = 0; i < temp.length; i++) temp[i].removeAttribute("disabled");		
 	toggle(false);
 	STOP = false;	
 }
+
 async function pausing(){
 	return new Promise((resolve, reject)=>{
 		let stop = document.querySelector("#stop"), play = document.querySelector("#play");
@@ -161,6 +167,7 @@ async function pausing(){
 		play.addEventListener("click", other, {once: true});
 	});
 }
+
 function resize(){
 	let temp = document.querySelector("canvas");
 	let min = Math.min(window.innerWidth*0.5, window.innerHeight);
@@ -187,19 +194,23 @@ async function sleep(ms){
 		}, ms);
 	});
 }
+
 async function graph(arr){
 	await sleep(_offline.SLEEP);
 	clear();
 	drawArray(canvas, arr, document.querySelector("canvas").width/_offline.SIZE);
 }
+
 async function compare(arr, value){
 	await graph(arr);
 	compareBar(arr, value);		
 }
+
 async function compareBar(arr, value){
 	let canvasSize = (document.querySelector("canvas").width/_offline.SIZE)
     createRect(canvas, canvasSize*value, 0, canvasSize, arr[value]*canvasSize, document.querySelector(".compare").value);
 }
+
 async function selectionSort(arr) {
 	for (let i = 0; i < arr.length; i++) {
         let min = arr[i];
@@ -284,6 +295,7 @@ async function combine(arr, index1, length1, index2, length2) {
 	}
 	return arr;
 }
+
 async function bogoSort(arr) {
 	while(!sorted(arr)) {
 		let rand1 = Math.floor(Math.random()*(arr.length));
@@ -296,10 +308,12 @@ async function bogoSort(arr) {
 		await graph(arr);
 	}
 }
+
 function sorted(arr) {
 	for (let i = 0; i < arr.length-1; i++) if (arr[i] > arr[i+1]) return false;
 	return true;
 }
+
 function randNumArr(size){
     let max = size;
     let min = 1;
