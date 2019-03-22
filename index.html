@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Sorting Algorithms</title>
+	<link rel="shortcut icon" href="">
+	<link rel="stylesheet" type="text/css" href="styles.css">	
+</head>
+<body>
+	<div class="flex">
+		<div class="container">
+			<h1>Select A Sorting Algorithm</h1>
+			<div>
+				<button class="disableable" onclick="_sort(selectionSort);">Selection Sort</button>
+				<button class="disableable" onclick="_sort(insertionSort)">Insertion Sort</button>
+				<button class="disableable" onclick="_sort(mergeSort)">Merge Sort</button>	
+				<button class="disableable" onclick="_sort(bogoSort)">Bogo Sort</button>				
+			</div>
+			<div>
+				<button id="play" onclick="toggle();" disabled>PAUSE &#124;&#124;</button>		
+				<button id="stop">Cancel Sorting Algorithm</button>
+			</div>
+			<h1>Adjust Values</h1>
+			<table>
+				<tr>
+					<td class="adjust" style="width:30%">
+						<span>Generated Numbers: </span>
+					</td>
+					<td class="adjust">
+						<div class="link">
+							<input id="size" class="slider disableable" type="range" min="1" max="2000" step="1" value="100"><input class="disableable" id="sizeAdjuster" type="text" value="100">
+						</div>
+					</td>		
+				</tr>
+				<tr>
+					<td class="adjust">
+						<span>Delay (ms): </span>
+					</td>			
+					<td class="adjust">
+						<div class="link">
+							<input id="time" class="slider" type="range" min="4" max="1000" step="1" value="4"><input id="timeAdjuster" type="text" placeholder="Delay in milliseconds" value="4">		
+						</div>		
+					</td>
+				</tr>
+				<tr>
+					<td class="adjust">
+						<span>Bar Color: </span>
+					</td>
+					<td class="adjust">
+						<input type="color" class="bar" value="#009900">
+					</td>
+				</tr>
+				<tr>
+					<td class="adjust">
+						<span>Comparison Bar Color: </span>
+					</td>
+					<td class="adjust">
+						<input type="color" class="compare" value="#ff0000">
+					</td>
+				</tr>
+			</table>
+			<button id="reset" onclick="reset();">Reset Adjustments</button>			
+		</div>	
+		<div class="container">
+			<canvas width="400" height="400"></canvas>	
+		</div>
+	</div>
+	<script type="text/javascript" src="environment.js"></script>
+</body>
+</html>
