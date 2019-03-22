@@ -17,14 +17,22 @@ div {
 	margin-top: 1vmin;
 	text-align: center;
 }
+h2 {
+	margin: 0 auto;
+	display: block;
+	text-align: center;
+	width: auto;
+	font-size: 7vmin;
+	font-weight: 900;	
+}
 h1 {
 	margin: 0 auto;
 	display: block;
 	text-align: center;
 	width: auto;
 	text-decoration: underline;
-	font-size: 5vmin;
-	margin-top: 8vmin;
+	font-size: 4.5vmin;
+	margin-top: 4vmin;
 }
 button {
 	outline: none;
