@@ -105,9 +105,6 @@ function toggle(val){
 	PAUSE = (typeof val === 'boolean')? val : ((PAUSE) ? false : true);
 	play.innerText = (PAUSE) ? "RESUME \u25b6" : "PAUSE \x7c\x7c";
 	if (val === false) play.setAttribute("disabled", '');
-	if (typeof val !== 'boolean') {
-		
-	}
 }
 
 function reset(){
