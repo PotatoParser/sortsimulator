@@ -15,6 +15,10 @@ let _offline = offlineJSON({SIZE: 100, SLEEP: 4, bar: "#009900", compare: "#ff00
 	slider("#size", changeSize);
 	slider("#time", changeTime);
 	window.addEventListener("resize", resize);
+	window.addEventListener("keyup", e=>{
+		if (e.key === ' ') document.querySelector("#play").dispatchEvent(new MouseEvent("click"));
+		if (e.key === "Escape") document.querySelector("#stop").dispatchEvent(new MouseEvent("click"));
+	});
 	document.querySelector("#stop").addEventListener("click", ()=>{
 		STOP = true;
 		toggle(false);
@@ -98,9 +102,12 @@ function slider(query, func){
 
 function toggle(val){
 	let play = document.querySelector("#play");
-	PAUSE = (typeof val == 'boolean')? val : ((PAUSE) ? false : true);
+	PAUSE = (typeof val === 'boolean')? val : ((PAUSE) ? false : true);
 	play.innerText = (PAUSE) ? "RESUME \u25b6" : "PAUSE \x7c\x7c";
 	if (val === false) play.setAttribute("disabled", '');
+	if (typeof val !== 'boolean') {
+		
+	}
 }
 
 function reset(){
@@ -232,7 +239,7 @@ async function insertionSort(arr){
         let max = arr[i];
         for (let j = i; j >= 0; j--) {
         	await compare(arr, j);
-            if (j == 0 && !(max > arr[j])) {
+            if (j === 0 && !(max > arr[j])) {
                 for (let k = i; k > j; k--) {
                     arr[k] = arr[k-1];
                 }
@@ -260,7 +267,7 @@ async function mergeSort(arr, index, length) {
 		await mergeSort(arr, index, half);
 		await mergeSort(arr, index+half, length-half);
 		await combine(arr, index, half, index+half, length-half);
-	} else if (length == 2){
+	} else if (length === 2){
 		await compare(arr, index);				
 		if (arr[index] > arr[index+1]) {
 			let temp = arr[index+1];
@@ -278,7 +285,7 @@ async function combine(arr, index1, length1, index2, length2) {
 	let arr2 = [];
 	for (let i = 0; i < length1; i++) arr1.push(arr[index1+i]);
 	for (let i = index2; i < index2+length2; i++) arr2.push(arr[i]);
-	while (!(in1 == length1 || in2 == length2)) {
+	while (!(in1 === length1 || in2 === length2)) {
 		await compare(arr, index1+in1+in2);
 		if (arr1[in1] > arr2[in2]) {
 			arr[index1+in1+in2] = arr2[in2];
@@ -288,7 +295,7 @@ async function combine(arr, index1, length1, index2, length2) {
 			in1++;
 		}		
 	}
-	if (in1 != length1) {
+	if (in1 !== length1) {
 		for (let i = in1; i < length1; i++) arr[index1+in2+i] = arr1[i];
 	} else {
 		for (let i = in2; i < length2; i++) arr[index1+in1+i] = arr2[i];		
