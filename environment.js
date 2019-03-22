@@ -114,6 +114,7 @@ function reset(){
 	changeSize(_offline.SIZE);
 	document.querySelector(".bar").value = "#009900";
 	document.querySelector(".compare").value = "#ff0000";
+	createFavicon();
 }
 
 async function _sort(func){
