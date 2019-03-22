@@ -260,7 +260,6 @@ async function mergeSort(arr, index, length) {
 		await mergeSort(arr, index, half);
 		await mergeSort(arr, index+half, length-half);
 		await combine(arr, index, half, index+half, length-half);
-		await graph(arr);			
 	} else if (length == 2){
 		await compare(arr, index);				
 		if (arr[index] > arr[index+1]) {
@@ -269,6 +268,7 @@ async function mergeSort(arr, index, length) {
 			arr[index] = temp;
 		}
 	}
+	await graph(arr);	
 }
 
 async function combine(arr, index1, length1, index2, length2) {
@@ -314,16 +314,16 @@ function sorted(arr) {
 	return true;
 }
 
-function randNumArr(size){
-    let max = size;
-    let min = 1;
-    let vals = [];
-    for (let i = 0; i < max; i++) {
-        let rand = Math.floor(Math.random()*(max-min+1)+min);
-        while(vals.indexOf(rand)!==-1) rand = Math.floor(Math.random()*(max-min+1)+min);
-        vals.push(rand);
-    }
-    return vals;
+function randNumArr(size) {
+	let arr = [], rand, temp;
+	for (let i = 0; i < size; i++) arr[i] = i+1;
+	for (let i = size-1; i > 0; i--) {
+		rand = Math.floor(Math.random()*(i+1));
+		temp = arr[i];
+		arr[i] = arr[rand];
+		arr[rand] = temp;
+	}
+	return arr;
 }
 
 function createRect(canvas, x,y, width, height, color) {
