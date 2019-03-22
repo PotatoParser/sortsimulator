@@ -1,8 +1,23 @@
 // Github Repo: https://github.com/PotatoParser/sortsimulator
+
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let STOP, PAUSE;	
 let _offline = offlineJSON({SIZE: 100, SLEEP: 4, bar: "#009900", compare: "#ff0000"});
+
+Object.defineProperty(Array.prototype, "swap", {
+	enumerable: false,
+	value: function(first, second) {
+		if (this[first] === undefined || this[second] === undefined) {
+			console.err("Unable to swap");
+			throw "Unable to swap";
+		}
+		let temp = this[first];
+		this[first] = this[second];
+		this[second] = temp;
+		return this;
+	}
+});
 
 (function load(){
 	resize();
@@ -41,7 +56,6 @@ let _offline = offlineJSON({SIZE: 100, SLEEP: 4, bar: "#009900", compare: "#ff00
 	get("https://api.github.com/repos/potatoparser/sortsimulator/releases/latest").then(d=>{
 		let repo = document.querySelector("a");
 		repo.innerText = d.tag_name;
-		repo.href = d.html_url;
 	}).catch(e=>{console.warn("Cannot fetch latest release!")});
 })();
 
@@ -240,17 +254,14 @@ async function compareBar(arr, value){
 
 async function selectionSort(arr) {
 	for (let i = 0; i < arr.length; i++) {
-        let min = arr[i];
         let minIndex = i;
         for (let j = i; j < arr.length; j++) {
         	await compare(arr, j);
-            if (min > arr[j]) {
-                min = arr[j];
+            if (arr[minIndex] > arr[j]) {
                 minIndex = j;
             }
         }
-        arr[minIndex] = arr[i];
-        arr[i] = min;
+        arr.swap(i, minIndex);
         await graph(arr);
     }
 }
@@ -290,9 +301,7 @@ async function mergeSort(arr, index, length) {
 	} else if (length === 2){
 		await compare(arr, index);				
 		if (arr[index] > arr[index+1]) {
-			let temp = arr[index+1];
-			arr[index+1] = arr[index];
-			arr[index] = temp;
+			arr.swap(index+1, index);
 		}
 	}
 	await graph(arr);	
