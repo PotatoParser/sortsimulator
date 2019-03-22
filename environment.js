@@ -1,5 +1,4 @@
 // Github Repo: https://github.com/PotatoParser/sortsimulator
-
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let STOP, PAUSE;	
@@ -38,8 +37,31 @@ let _offline = offlineJSON({SIZE: 100, SLEEP: 4, bar: "#009900", compare: "#ff00
 
 	document.querySelector(".bar").addEventListener("change", ()=>{
 		_offline.bar = document.querySelector(".bar").value;
-	});		
+	});
+	get("https://api.github.com/repos/potatoparser/sortsimulator/releases/latest").then(d=>{
+		let repo = document.querySelector("a");
+		repo.innerText = d.tag_name;
+		repo.href = d.html_url;
+	}).catch(e=>{console.warn("Cannot fetch latest release!")});
 })();
+
+async function get(path) {
+	return new Promise(async (resolve, reject)=>{		
+		let temp = new XMLHttpRequest();
+		temp.open('GET', path, true);
+		temp.send();
+		temp.onreadystatechange = ()=>{
+			if (temp.readyState === 4) {
+				try {
+					let body = JSON.parse(temp.response);
+					resolve(body);
+				} catch(e) {
+					reject();
+				}
+			}
+		};
+	});
+}
 
 function offlineJSON(data){
 	data = data || {};
