@@ -46,7 +46,7 @@ let _offline = offlineJSON({SIZE: 100, SLEEP: 4, bar: "#009900", compare: "#ff00
 })();
 
 async function get(path) {
-	return new Promise(async (resolve, reject)=>{		
+	return new Promise((resolve, reject)=>{		
 		let temp = new XMLHttpRequest();
 		temp.open('GET', path, true);
 		temp.send();
