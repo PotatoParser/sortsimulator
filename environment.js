@@ -55,7 +55,7 @@ Object.defineProperty(Array.prototype, "swap", {
 	});
 	get("https://api.github.com/repos/potatoparser/sortsimulator/releases/latest").then(d=>{
 		let repo = document.querySelector("a");
-		repo.innerText = d.tag_name;
+		repo.innerText = `${d.tag_name} \xa9 Wilson Nguyen`;
 	}).catch(e=>{console.warn("Cannot fetch latest release!")});
 })();
 
