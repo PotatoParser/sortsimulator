@@ -84,7 +84,7 @@ input[type="text"] {
 	border-width: 2px;
 	background-color: transparent;
 	border-radius: 3px;
-	width: 30vmin;
+	width: 15vw;
 }
 input[disabled] {
 	border-color: rgba(0,0,0,0.3);
@@ -104,7 +104,7 @@ td {
 .slider {
 	-webkit-appearance: none;
 	appearance: none;
-	width: 30vmin;
+	width: 15vw;
 	height: 2vmin;
 	background: transparent;
 	border-color: rgba(0,0,0,0.7);
@@ -170,7 +170,12 @@ td {
 a {
 	font-size: 2vmin;
 	color: black;
-	margin: auto 0;
-	display: block;
+	margin: 0 auto;
+	display: inline-block;
 	text-align: center;
+	width: auto;
+}
+
+.repo {
+	margin: 0 auto;
 }
