@@ -3,7 +3,7 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let STOP, PAUSE;	
-let _offline = offlineJSON({SIZE: 100, SLEEP: 4, bar: "#009900", compare: "#ff0000"});
+let _offline = offlineJSON({SIZE: 100, SLEEP: 4, bar: "#009900", compare: "#ff0000", compareOn: true});
 
 Object.defineProperty(Array.prototype, "swap", {
 	enumerable: false,
@@ -48,10 +48,14 @@ Object.defineProperty(Array.prototype, "swap", {
 
 	document.querySelector(".compare").addEventListener("change", ()=>{
 		_offline.compare = document.querySelector(".compare").value;
+		if (_offline.compare === _offline.bar) _offline.compareOn = false;
+		else _offline.compareOn = true;
 	});
 
 	document.querySelector(".bar").addEventListener("change", ()=>{
 		_offline.bar = document.querySelector(".bar").value;
+		if (_offline.compare === _offline.bar) _offline.compareOn = false;
+		else _offline.compareOn = true;	
 	});
 	get("https://api.github.com/repos/potatoparser/sortsimulator/releases/latest").then(d=>{
 		let repo = document.querySelector("a");
@@ -85,6 +89,7 @@ function offlineJSON(data){
 			localStorage.setItem("offlineJSON", JSON.stringify(obj));						
 		},
 		get: (obj, prop, etc)=>{
+			if (obj[prop] === undefined) reset();
 			return obj[prop];
 		}
 	}
@@ -103,16 +108,24 @@ function offlineJSON(data){
 			return true;
 		}
 	});			
+	Object.defineProperty(storedData, "exists", {
+		enumerable: false,
+		value: function(){
+			for (let key in data) if (this[key] === undefined) return false;
+			return true;
+		}
+	});	
 	let temp = new Proxy(storedData, handle);		
 	return temp;
 }
 
 function createFavicon(){
 	let temp = document.createElement("canvas");
-	temp.height = 128;
-	temp.width = 128;
-	let tempArr = randNumArr(128);
-	createRect(temp, 0,0,128,128, "white");
+	let size = 8;
+	temp.height = size;
+	temp.width = size;
+	let tempArr = randNumArr(size);
+	createRect(temp, 0,0,size,size, "white");
 	drawArray(temp, tempArr, 1);
 	document.querySelector("link").href = temp.toDataURL();
 }
@@ -154,6 +167,7 @@ function reset(){
 }
 
 async function _sort(func){
+	_offline.exists();
 	createFavicon();
 	lockAll();
 	try {
@@ -243,6 +257,7 @@ async function graph(arr){
 }
 
 async function compare(arr, value){
+	if (!_offline.compareOn) return;
 	await graph(arr);
 	compareBar(arr, value);		
 }
@@ -330,6 +345,21 @@ async function combine(arr, index1, length1, index2, length2) {
 		for (let i = in2; i < length2; i++) arr[index1+in1+i] = arr2[i];		
 	}
 	return arr;
+}
+
+async function bubbleSort(arr){
+	let temp = true;
+	while (temp) {
+		temp = false;
+		for (let i = 0; i < arr.length-1; i++) {
+			await compare(arr, i+1);
+			if (arr[i] > arr[i+1]) {
+				arr.swap(i, i+1);
+				temp = true;
+			}
+		}
+		await graph(arr);
+	}
 }
 
 async function bogoSort(arr) {
