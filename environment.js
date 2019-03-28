@@ -279,6 +279,7 @@ async function selectionSort(arr) {
         arr.swap(i, minIndex);
         await graph(arr);
     }
+    return arr;
 }
 async function insertionSort(arr){
     for (let i = 0; i < arr.length; i++) {
@@ -301,6 +302,7 @@ async function insertionSort(arr){
         }
         await graph(arr);
     }
+    return arr;
 }
 
 async function mergeSort(arr, index, length) {		
@@ -319,7 +321,8 @@ async function mergeSort(arr, index, length) {
 			arr.swap(index+1, index);
 		}
 	}
-	await graph(arr);	
+	await graph(arr);
+	return arr;	
 }
 
 async function combine(arr, index1, length1, index2, length2) {
@@ -360,6 +363,7 @@ async function bubbleSort(arr){
 		}
 		await graph(arr);
 	}
+	return arr;
 }
 
 async function bogoSort(arr) {
@@ -373,6 +377,7 @@ async function bogoSort(arr) {
 		arr[rand2] = temp;
 		await graph(arr);
 	}
+	return arr;
 }
 
 function sorted(arr) {
