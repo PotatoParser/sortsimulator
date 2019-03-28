@@ -30,6 +30,7 @@ Object.defineProperty(Array.prototype, "swap", {
 	slider("#time", changeTime);
 	window.addEventListener("resize", resize);
 	window.addEventListener("keyup", e=>{
+		e.preventDefault();
 		if (e.key === ' ') document.querySelector("#play").dispatchEvent(new MouseEvent("click"));
 		if (e.key === "Escape") document.querySelector("#stop").dispatchEvent(new MouseEvent("click"));
 	});
