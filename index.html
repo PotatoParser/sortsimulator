@@ -8,20 +8,18 @@
 <body>
 	<div class="flex">
 		<div class="container">
-			<h2>Sort Simulator</h2>
-			<h1>Select A Sorting Algorithm</h1>
+			<h1>Sort Simulator</h1>
 			<div>
-				<button class="disableable" onclick="_sort(selectionSort);">Selection Sort</button>
-				<button class="disableable" onclick="_sort(insertionSort)">Insertion Sort</button>
-				<button class="disableable" onclick="_sort(mergeSort)">Merge Sort</button>
-				<button class="disableable" onclick="_sort(bubbleSort)">Bubble Sort</button>						
-				<button class="disableable" onclick="_sort(bogoSort)">Bogo Sort</button>				
+				<button class="sorting disableable" onclick="_sort(selectionSort);" tip="Selects lowest value repetitively">Selection Sort</button>
+				<button class="sorting disableable" onclick="_sort(insertionSort)" tip="Inserts values between others">Insertion Sort</button>
+				<button class="sorting disableable" onclick="_sort(mergeSort)" tip="Divide and conquer values">Merge Sort</button>
+				<button class="sorting disableable" onclick="_sort(bubbleSort)" tip="Continuously swaps values">Bubble Sort</button>						
+				<button class="sorting disableable" onclick="_sort(bogoSort)" tip="Randomly swaps values">Bogo Sort</button>
 			</div>
 			<div>
 				<button id="play" onclick="toggle();" disabled>PAUSE &#124;&#124;</button>		
 				<button id="stop">Clear Sorting Algorithm</button>
 			</div>
-			<h1>Adjust Values</h1>
 			<table>
 				<tr>
 					<td class="adjust" style="width:30%">

@@ -17,22 +17,13 @@ div {
 	margin-top: 1vmin;
 	text-align: center;
 }
-h2 {
-	margin: 0 auto;
-	display: block;
-	text-align: center;
-	width: auto;
-	font-size: 7vmin;
-	font-weight: 900;	
-}
 h1 {
 	margin: 0 auto;
 	display: block;
 	text-align: center;
 	width: auto;
-	text-decoration: underline;
-	font-size: 4.5vmin;
-	margin-top: 4vmin;
+	font-size: 7vmin;
+	margin-bottom: 10vmin;
 }
 button {
 	outline: none;
@@ -73,6 +64,9 @@ span {
 	margin-bottom: 0;
 	color: red;
 	border: 2px solid red;
+}
+#stop {
+	margin-bottom: 10vmin;
 }
 input {
 	outline: none;
@@ -178,4 +172,29 @@ a {
 
 .repo {
 	margin: 0 auto;
+}
+@keyframes enter {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
+.sorting:hover::after {
+	content: attr(tip);
+	font-size: 2vmin;
+	background-color: rgba(255,255,255,1);
+	position: absolute;
+	top: 4vmin;
+	left: 0;
+	pointer-events: none;
+	border-style: solid;
+	border-width: 2px;
+	border-radius: 3px;	
+	border-color: rgba(0,0,0,0.7);	
+	z-index: 3;
+	font-style: italic;
+	text-align: center;
+	animation: enter 400ms linear;
+}
+
+.sorting[disabled]:hover::after {
+	border-color: rgba(0,0,0,0.4);	
 }
