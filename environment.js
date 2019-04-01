@@ -29,6 +29,7 @@ Object.defineProperty(Array.prototype, "swap", {
 	slider("#size", changeSize);
 	slider("#time", changeTime);
 	window.addEventListener("resize", resize);
+	window.addEventListener("keydown", e=>{if(e.key === ' ') e.preventDefault()});
 	window.addEventListener("keyup", e=>{
 		e.preventDefault();
 		if (e.key === ' ') document.querySelector("#play").dispatchEvent(new MouseEvent("click"));
@@ -352,8 +353,8 @@ async function combine(arr, index1, length1, index2, length2) {
 }
 
 async function bubbleSort(arr){
-	let temp = true;
-	while (temp) {
+	let temp;
+	do {
 		temp = false;
 		for (let i = 0; i < arr.length-1; i++) {
 			await compare(arr, i+1);
@@ -363,7 +364,7 @@ async function bubbleSort(arr){
 			}
 		}
 		await graph(arr);
-	}
+	} while(temp);
 	return arr;
 }
 
