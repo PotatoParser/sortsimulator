@@ -1,5 +1,10 @@
 // Github Repo: https://github.com/PotatoParser/sortsimulator
-
+try {
+	let temp = 0;
+	const temp2 = temp+1;
+} catch(e) {
+	alert("Unable to load JavaScript on this browser!");
+}
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let STOP, PAUSE;	
