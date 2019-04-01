@@ -1,5 +1,4 @@
 // Github Repo: https://github.com/PotatoParser/sortsimulator
-if (_v < 1.6) alert("Requires an updated version of JavaScript! Use a different browser!");
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 let STOP, PAUSE;	
@@ -20,6 +19,7 @@ Object.defineProperty(Array.prototype, "swap", {
 });
 
 (function load(){
+	if (_v < 1.6) return alert("Requires an updated version of JavaScript! Use a different browser!");
 	resize();
 	createFavicon();
 	changeTime(_offline.SLEEP);
