@@ -342,7 +342,8 @@ async function combine(arr, index1, length1, index2, length2) {
 		} else {
 			arr[index1+in1+in2] = arr1[in1];
 			in1++;
-		}		
+		}
+		if (!_offline.compareOn) await graph(arr);		
 	}
 	if (in1 !== length1) {
 		for (let i = in1; i < length1; i++) arr[index1+in2+i] = arr1[i];
