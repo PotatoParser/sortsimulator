@@ -198,3 +198,20 @@ a {
 .sorting[disabled]:hover::after {
 	border-color: rgba(0,0,0,0.4);	
 }
+
+.loading{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(255,255,255,0.95);
+	z-index: 999;
+	cursor: wait;
+	display: table;
+}
+
+.fill {
+	display: table-cell;
+	vertical-align: middle;
+}

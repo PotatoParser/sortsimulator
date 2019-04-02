@@ -19,7 +19,6 @@ Object.defineProperty(Array.prototype, "swap", {
 });
 
 (function load(){
-	if (_v < 1.6) return alert("Requires an updated version of JavaScript! Use a different browser!");
 	resize();
 	createFavicon();
 	changeTime(_offline.SLEEP);
@@ -62,6 +61,7 @@ Object.defineProperty(Array.prototype, "swap", {
 	get("https://api.github.com/repos/potatoparser/sortsimulator/releases/latest").then(d=>{
 		let repo = document.querySelector("a");
 		repo.innerText = `${d.tag_name} \xa9 Wilson Nguyen`;
+		document.querySelector(".loading").remove();		
 	}).catch(e=>{console.warn("Cannot fetch latest release!")});
 })();
 
